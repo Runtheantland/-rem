@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no">
+		<title>卖车陷阱</title>
+		<link rel="stylesheet" href="css/base.css" />
+		<style type="text/css">
+			input::-webkit-input-placeholder,
+			textarea::-webkit-input-placeholder {
+				/* WebKit browsers */
+				
+				color: #dadada;
+				font-family: '微软雅黑 Regular', '微软雅黑';
+			}
+			input::-moz-placeholder,
+			textarea::-moz-placeholder {
+				/* Mozilla Firefox 4 to 18 */
+				
+				color: #dadada;
+				font-family: '微软雅黑 Regular', '微软雅黑';
+			}
+			input:-ms-input-placeholder,
+			textarea:-ms-input-placeholder {
+				/* Internet Explorer 10+ */
+				
+				color: #dadada;
+				font-family: '微软雅黑 Regular', '微软雅黑';
+			}
+			.line {
+				position: relative;
+			}
+			.line:after {
+				width: 200%;
+				height: 200%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 0;
+				content: "";
+				-webkit-transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform: scale(0.5);
+				transform-origin: 0 0;
+			}
+			.index_body {
+				margin-bottom: 1.333rem;
+			}
+			.index_head {
+				height: 1.066rem;
+				position: relative;
+			}
+			[data-dpr="1"] .index_head:after {
+				border-bottom: 1px solid #ccc;
+			}
+			[data-dpr="2"] .index_head {
+				border-bottom: 1px solid #ccc;
+			}
+			[data-dpr="3"] .index_head {
+				border-bottom: 1px solid #ccc;
+			}
+			.leftBackBtn {
+				background: url(img/backBtn.png) no-repeat;
+				background-size: 0.293rem 0.506rem;
+				width: 0.293rem;
+				height: 0.506rem;
+				position: absolute;
+				left: 0.32rem;
+				top: 0.266rem;
+			}
+			.rightShareBtn {
+				background: url(img/shareBtn.png) no-repeat;
+				background-size: 0.586rem 0.186rem;
+				width: 0.586rem;
+				height: 0.186rem;
+				position: absolute;
+				right: 0.32rem;
+				top: 0.426rem;
+			}
+			.title {
+				margin: 0.533rem 0.32rem 0 0.32rem;
+			}
+			.title h1 {
+				font-size: 32px;
+				color: #1f1f1f;
+				line-height: 1.066rem;
+				margin-bottom: 0.8rem;
+				font-weight: bold;
+			}
+			[data-dpr="2"] .title h1 {
+				font-size: 64px;
+			}
+			[data-dpr="3"] .title h1 {
+				font-size: 96px;
+			}
+			.titleLogo {
+				overflow: hidden;
+			}
+			.titleLogo .titleLogo_left {
+				float: left;
+			}
+			.titleLogo .titleLogo_left img {
+				width: 0.8rem;
+				margin-top: 0.133rem;
+			}
+			.titleLogo .titleLogo_left dt {
+				float: left;
+				margin-right: 0.266rem;
+			}
+			.titleLogo .titleLogo_left dl {
+				overflow: hidden;
+			}
+			.titleLogo .titleLogo_left dd {
+				float: left;
+			}
+			.titleLogo .titleLogo_left dd p {
+				font-size: 10px;
+			}
+			[data-dpr="2"] .titleLogo .titleLogo_left dd p {
+				font-size: 20px;
+			}
+			[data-dpr="3"] .titleLogo .titleLogo_left dd p {
+				font-size: 30px;
+			}
+			.titleLogo .titleLogo_left dd h4 {
+				font-size: 15px;
+				color: #1f1f1f;
+			}
+			[data-dpr="2"] .titleLogo .titleLogo_left dd h4 {
+				font-size: 30px;
+			}
+			[data-dpr="3"] .titleLogo .titleLogo_left dd h4 {
+				font-size: 45px;
+			}
+			.titleLogo .titleLogo_right {
+				float: right;
+				width: 1.813rem;
+				height: 0.8rem;
+				line-height: 0.8rem;
+				margin-top: 0.053rem;
+				background-color: #2990d5;
+				color: #fff;
+				border-radius: 0.133rem;
+				text-align: center;
+				font-weight: bold;
+			}
+			.oldCreate {
+				padding: 0 0.106rem;
+				border-radius: 0.053rem;
+				margin-right: 0.053rem;
+			}
+			[data-dpr="1"] .oldCreate:after {
+				border: 1px solid #ccc;
+			}
+			[data-dpr="2"] .oldCreate {
+				border: 1px solid #ccc;
+			}
+			[data-dpr="3"] .oldCreate {
+				border: 1px solid #ccc;
+			}
+			.dayTime {} .main_content {
+				margin-top: 0.746rem;
+			}
+			.main_content p {
+				margin-bottom: 0.666rem;
+				font-size: 16px;
+				color: #1f1f1f;
+			}
+			[data-dpr="2"] .main_content p {
+				font-size: 32px;
+			}
+			[data-dpr="3"] .main_content p {
+				font-size: 48px;
+			}
+			.main_content h2 {
+				font-size: 18px;
+				color: #1f1f1f;
+				margin-bottom: 0.533rem;
+				font-weight: 700;
+			}
+			[data-dpr="2"] .main_content h2 {
+				font-size: 36px;
+			}
+			[data-dpr="3"] .main_content h2 {
+				font-size: 54px;
+			}
+			.main_content h2:nth-of-type(2) {
+				margin-top: 0.533rem;
+			}
+			.main_content img {
+				display: block;
+				max-width: 8.8rem;
+				margin: 0 auto 1.066rem auto;
+			}
+			.bottomTitle {
+				margin-bottom: 0.933rem;
+			}
+			.bottomTitle span {
+				padding: 0.106rem 0.346rem;
+				background: #f3f5f4;
+				border-radius: 0.133rem;
+				font-size: 15px;
+				color: #4d4b4c;
+				margin-right: 0.133rem;
+			}
+			[data-dpr="1"] .bottomTitle span:after {
+				border: 1px solid #f0f2f1;
+			}
+			[data-dpr="2"] .bottomTitle span {
+				border: 1px solid #f0f2f1;
+			}
+			[data-dpr="3"] .bottomTitle span {
+				border: 1px solid #f0f2f1;
+			}
+			[data-dpr="2"] .bottomTitle span {
+				font-size: 30px;
+			}
+			[data-dpr="3"] .bottomTitle span {
+				font-size: 45px;
+			}
+			.goodArticle {
+				margin-bottom: 0.8rem;
+			}
+			.goodArticle span {
+				font-size: 15px;
+				color: #4d4b4c;
+			}
+			[data-dpr="2"] .goodArticle span {
+				font-size: 30px;
+			}
+			[data-dpr="3"] .goodArticle span {
+				font-size: 45px;
+			}
+			.goodArticle span:nth-of-type(1) {
+				width: 0.373rem;
+				height: 0.373rem;
+			}
+			.goodArticle span:nth-of-type(1) {
+				background: url(img/digg_article.png) no-repeat left center;
+				background-size: 0.373rem 0.373rem;
+				padding-left: 0.48rem;
+			}
+			.goodArticle span:nth-of-type(1).on {
+				background: url(img/digg_article_hover.png) no-repeat left center;
+				background-size: 0.373rem 0.373rem;
+				color: #fa343d;
+			}
+			.goodArticle span:nth-of-type(2) {
+				float: right;
+			}
+			/*提交表单*/
+			
+			.myForm {
+				padding: 0.426rem 10%;
+			}
+			.secondTop {
+				color: #0081cd;
+				font-size: 14px;
+			}
+			[data-dpr="2"] .secondTop {
+				font-size: 28px;
+			}
+			[data-dpr="3"] .secondTop {
+				font-size: 42px;
+			}
+			.secondTop font {
+				font-size: 18px;
+				color: #0081cd;
+				padding: 0 0.106rem;
+				font-weight: bold;
+			}
+			[data-dpr="2"] .secondTop font {
+				font-size: 36px;
+			}
+			[data-dpr="3"] .secondTop font {
+				font-size: 54px;
+			}
+			.secondBody {
+				padding-top: 0.186rem;
+			}
+			.secondBody .scFromLi {
+				background: #fff;
+				height: 1.068rem;
+				width: 100%;
+				position: relative;
+				margin-bottom: 0.4rem;
+				z-index: 0;
+			}
+			[data-dpr="1"] .secondBody .scFromLi:after {
+				border: 1px solid #c1c1c1;
+			}
+			[data-dpr="2"] .secondBody .scFromLi {
+				border: 1px solid #c1c1c1;
+			}
+			[data-dpr="3"] .secondBody .scFromLi {
+				border: 1px solid #c1c1c1;
+			}
+			.secondBody .scFromLi > div {
+				float: left;
+				font-size: 14px;
+			}
+			[data-dpr="2"] .secondBody .scFromLi > div {
+				font-size: 28px;
+			}
+			[data-dpr="3"] .secondBody .scFromLi > div {
+				font-size: 42px;
+			}
+			.secondBody .scFromLi_center {
+				width: 47%;
+				height: 1.066rem;
+				line-height: 1.066rem;
+				padding-left: 3%;
+			}
+			.secondBody .scFromLi_center span {
+				color: #dadada;
+			}
+			.secondBody .fromLi_text {
+				color: #dadada;
+			}
+			.secondBody .phoneTxt {
+				width: 60%;
+				height: 1.066rem;
+				line-height: 1.066rem;
+				padding-left: 5%;
+			}
+			.secondBody .scFromLi_left {
+				color: #fff;
+				height: 1.066rem;
+				line-height: 1.066rem;
+				overflow: hidden;
+				padding: 0 0.266rem 0 0;
+				background: url(img/xian.png) no-repeat right center;
+				background-size: 0.026rem 0.426rem;
+			}
+			.secondBody input[type=tel] {
+				width: 100%;
+				height: 0.666rem;
+				 overflow-y: scroll;
+				line-height: 0.666rem;
+				outline: none;
+				display: block;
+				padding: 0.186rem 0;
+				margin: 0;
+				border: 0;
+			}
+			.secondBody .scFromLi img {
+				line-height: 1.066rem;
+				height: 1.066rem;
+				display: block;
+				float: left;
+				margin: 0 0.106rem;
+			}
+			.scFromLi_left span {
+				color: #686969;
+				font-size: 14px;
+			}
+			[data-dpr="2"] .scFromLi_left span {
+				font-size: 28px;
+			}
+			[data-dpr="3"] .scFromLi_left span {
+				font-size: 42px;
+			}
+			.scFromLi .scFromLi_right {
+				position: absolute;
+				right: 0.266rem;
+				top: 0.426rem;
+				width: 0.4rem;
+				height: 0.186rem;
+				background: url(img/select_09.png) no-repeat;
+				background-size: 0.4rem 0.186rem;
+			}
+			.secondBody .fromLi_text {
+				height: 1.066rem;
+				line-height: 1.066rem;
+				width: 47%;
+				white-space: nowrap;
+				overflow: hidden;
+				padding-left: 3%;
+			}
+			.secondBody .submitBtn {
+				width: 35%;
+				text-align: center;
+				background: #0081cd;
+				float: left;
+				height: 1.12rem;
+				line-height: 1.12rem;
+				color: #fff;
+				font-size: 18px !important;
+				font-weight: bold;
+				position: absolute;
+				right: -0.026rem;
+				top: -0.026rem;
+			}
+			[data-dpr="2"] .secondBody .submitBtn {
+				font-size: 36px !important;
+			}
+			[data-dpr="3"] .secondBody .submitBtn {
+				font-size: 54px !important;
+			}
+			.myForm > p {
+				text-align: right;
+				font-size: 14px;
+				margin-top: 0.266rem;
+				color: #333;
+			}
+			[data-dpr="2"] .myForm > p {
+				font-size: 28px;
+			}
+			[data-dpr="3"] .myForm > p {
+				font-size: 42px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="index_body">
+			<header class="index_head line">
+				<div class="leftBackBtn"></div>
+				<div class="rightShareBtn"></div>
+			</header>
+
+			<section class="title">
+				<h1>卖车坑爹陷阱频现 <br>小白们该怎么办？</h1>
+				<div class="titleLogo">
+					<div class="titleLogo_left">
+						<dl>
+							<dt>
+                				<img src="img/logoTitle.png">
+                			</dt>
+							<dd>
+								<h4>车置宝二手车速卖平台</h4>
+								<p><span class="oldCreate">原创</span><span class="dayTime">09-20  08：09</span></p>
+
+							</dd>
+						</dl>
+					</div>
+					<div class="titleLogo_right">
+						＋关注
+					</div>
+				</div>
+				<div class="main_content">
+
+					<p>今年夏天，我国南方暴雨下个不停，大有成泽国的趋势。与此同时，许多车辆变成泡水车，大灾过后，一些无良的二手车贩子，又开始打起了倒腾泡水车的生意，而这仅仅是二手车售卖水深表现的的冰山一角。</p>
+					<p>众所周知，传统二手车市场内的不良商贩，
+						<br />利用车主不懂二手车交易办理的流程和二手车车况、必备证件等相关信息的不对称，在交易中欺行霸市。</p>
+					<p>无良黄牛的肆虐，降低了外界对于二手车市场的认同度，同时敲打了买方和卖方用户的信心。楼主对这些黄牛也是深恶痛疾，经过几个月的各渠道深入研究，楼主基本摸清了这些二道贩的“套路”。</p>
+					<h2>高价“垂钓”卖车者 对车辆问题进行无限放大</h2>
+					<p>全国所有二手车市场附近的街边，都会有这样一种情况，每隔几米远就有二三人聚在路边闲聊，身旁竖着一块牌子“现金高价回收旧车。”但凡经过二手车市场边上的道路，就会有几个人围过来搭讪或盘道，“兄弟伙，卖车吗？到我这里，价格绝对是最高的。”遇上咱们真有心想卖车问问价格的朋友，还没等你的车子停稳，这些个车虫和黄牛们就会迅速拉开车门，拥进你的车内，七嘴八舌地出价，而且不会让你开走。</p>
+					<img src="img/contentImg1111.png">
+					<p>一旦你被虚高的价格诱惑，进入了旧车交易市场，黄牛们会围拢过来，会一唱一和，使劲夸你的车况好，还能卖出更高的价格，让你上钩。当谈定一个高价后，别以为这就是万事大吉了。在准备成交，付款过户时，这些人还会为你报出各种莫名其妙的手续费、过户费等，甚至还有可能“重新”发现车子的轮胎、刹车片等存在的种种“问题”，进行再次杀价。哪怕车是什么事故都没有，车况非常好，车贩子也能随口说出一堆毛病，将你的车贬的一文不值。</p>
+					<p>黄牛通常围着车子看一圈，看发动机和变速箱，说：“风扇皮带好像松了需要更换，发动机有异响要检修，左前门有个坑要钣金，车身颜色前后不一样得全车喷漆“……轻描淡写间，少则几千块多则上万的价格被压低，比当初给你的价格要低很多。你会发现黄牛没有经过任何专业仪器的检测，报价随心所欲。加之车贩子还会抓住车主货比三家的心理，往往会偷偷告知其他车贩或者附近二手车市场同行，故意制造多方低报价的假象，从而争取车源流回至自己手中。所以车主很可能会稀里糊涂地接受了黄牛杀价后的定价</p>
+					<h2>对卖车者进行窃密  个人隐私毫无保障</h2>
+					<p>在旧车市场门口，会有一些黄牛御用的“线人“，他们没有任何资质，不具备收车能力，有的甚至都不了解您的车辆配置情况，使劲挤上你的车，死皮赖脸的和你搭话，套你的电话。如果你一不小心给了他们个人信息，后面可能跟着的就是每天无数通黄牛的骚扰电话。</p>
+					<p>我曾经有一个朋友，也是在最终决定成交时被车贩子再次杀价，他特别气愤跟贩子理论了半天最后决定不卖了，要回了自己车辆的登记本和行驶证等手续材料。可等回到家，他才发现夹在行驶证里的车险单等不翼而飞了，回头去找车贩子，人家一口咬定“没见过”、“不知道”，弄得我这个朋友很是郁闷，还要去补办，这是典型的对反悔卖主的事后报复。更有甚者，会直接瞒着车主，凭借手中的卖家证件和材料，私自把车辆过户到他人名下，这类违法行为需要执法部门的介入，耗费卖主的时间和精力。所以，在与黄牛的卖车交易环节上，个人隐私如履薄冰。</p>
+					<img src="img/contentImg2222.png">
+					<h2>克扣押金、滥收手续费 坑人没商量</h2>
+					<p>由于，车贩子看准车主不懂二手车交易，在过户这一块还会莫名其妙的给你报出许多莫名其妙的费用、手续费。例如，定好了8万元的车价，贩子会克扣车主2000-3000元的“押金“，声称用于处理一些”杂项费用“，然后声称过户以后再还给车主。殊不知，二手车贩子在办理手续时，往往故意将养路费等钱款克扣下来归为己有，更有甚者克扣部分车款不给原车主。最猫腻的是，很多卖家在卖车时车辆还有商业险未到期，80%的车主都不知道可以退险，因此“黄牛”通常收到车后就去退险。如果是一辆30万上下的豪华车，光退险，黄牛就可以挣1-2万。</p>
+					<p>更有甚者，就会以轮胎需要更换，车子需要保养等各种理由，不肯退还押金。这时候，车主的身份证件一般都还在贩子手上，不得不任由他们宰割吃哑巴亏了。这样到最后，又白白损失了冤枉钱。</p>
+					<p>可见，正规的购车协议是维护车主合法利益的最强有力的证据，如果不签订协议或协议中字句含糊，那么一旦车辆发生任何问题，车主的合法利益将无法得到保障。可现状是二手车市场上很多车贩子都是无照经营的个体户，即使签订了购车协议在权责分明上也十分不明确。</p>
+					<p>毋庸置疑，二手车行业水很“深”。不过，如果能够选择正规的网上卖车平台，不仅能够省事便捷，还能保障自身权益和车辆的高卖价。楼主推荐到私家车互联网出让平台车置宝卖车，</p>
+					<p>该平台可以电话约检，有免费的检测师上门检测，检测包含1602个检测标准和150个项目，30分钟完成检测并出具检测报告上传至竞拍平台。所有买家将通过网络即时出价竞拍，依照一次性封闭式竞拍机制，确保整个出价过程公平公正，价格更加规范合理，最快24小时完成交易。车辆成交后，车置宝有专业的服务人员免费代办过户，还有代办异地物流运输服务，全程没有猫腻，更没有上述黄牛那样窃取隐私、克扣欠款和证件资料的现象。</p>
+					<p>另一方面，面对各种黑幕，没有经验的车主们应该武装自身知识，接触评估大咖讲解和解惑。最快最省事的办法是接触新媒体渠道的讲堂。楼主推荐一个具有社会公益性质，并解决社会关切的微信讲堂。例如车置宝定期举办微信科普课堂《前车之鉴》，可以关注车置宝微信定期参加，楼主和几位朋友就经常相约在这个讲堂中一起听课。</p>
+					<p>该平台聚集了大量二手车专家、评估明星、检测师。这些评估师精英还会经常作客各大知名交通广播电台，定期举办二手车知识普及和讨论类的节目，并在微信进行1对1评估和咨询类服务。是卖车小白补充知识，远离卖车黑幕的捷径。</p>
+
+					<div class="bottomTitle">
+						<span class="line">车置宝</span><span class="line">二手车</span><span class="line">速卖</span>
+					</div>
+					<div class="goodArticle">
+						<span onclick="$(this).addClass('on')">赞</span>
+						<span>举报</span>
+					</div>
+					<img src="img/headBanner.jpg" alt="" style="width:100%;" />
+				</div>
+
+			</section>
+			<div class="myForm">
+				<div class="secondTop">
+					今日已有
+					<font id="index_option_top_count">01385</font>名车主提交信息
+				</div>
+				<form id="czbSubmitForm">
+					<input type="hidden" id="source0" name="source0" />
+					<input type="hidden" id="source" name="source" />
+					<input type="hidden" id="czhibBrandId" name="brandId" />
+					<input type="hidden" id="czhibBrandName" name="brandName" />
+					<input type="hidden" id="czhibBrandExtCode" name="brandExtCode" />
+					<input type="hidden" id="czhibModelId" name="modelId" />
+					<input type="hidden" id="czhibModelName" name="modelName" />
+					<input type="hidden" id="czhibModelExtCode" name="modelExtCode" />
+					<input type="hidden" id="czhibCarBaseId" name="carBaseId" />
+					<input type="hidden" id="carBaseName" name="carBaseName" />
+					<input type="hidden" id="czhibCarBaseExtCode" name="carBaseExtCode" />
+					<input type="hidden" id="czhibRegion" name="region" />
+					<input type="hidden" id="czhibRegionName" name="regionName" />
+					<input type="hidden" id="type" name="type" />
+					<input type="hidden" id="uid" name="uid" />
+					<div class="secondBody">
+
+						<div class="scFromLi line" id="index_option_city">
+							<div class="scFromLi_left">
+								<img src="img/scIcon1.png" alt="" />
+								<span>所在城市</span>
+							</div>
+							<div class="scFromLi_center ment_selectText">
+								<span class="open_city_select_value" id="index_option_city_cityName">请选择城市</span>
+							</div>
+							<div class="scFromLi_right"></div>
+						</div>
+
+						<div class="scFromLi line" id="carchoose_div">
+							<div class="scFromLi_left">
+								<img src="img/scIcon2.png" alt="" />
+								<span>车型信息</span>
+							</div>
+							<div class="fromLi_text" id="index_option_car_carTypeName">请选择车型</div>
+							<div class="scFromLi_right"></div>
+						</div>
+
+						<div class="scFromLi line">
+							<div class="phoneTxt">
+								<input type="tel" name="mobile" id="czhibMobile" value="" placeholder="请输入手机号码" />
+							</div>
+							<div class="submitBtn">立即评估</div>
+						</div>
+
+					</div>
+				</form>
+				<p>您的联系方式将会严格保密</p>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			;
+			(function(win, lib) {
+				var doc = win.document;
+				var docEl = doc.documentElement;
+				var metaEl = doc.querySelector('meta[name="viewport"]');
+				var flexibleEl = doc.querySelector('meta[name="flexible"]');
+				var dpr = 0;
+				var scale = 0;
+				var tid;
+				var flexible = lib.flexible || (lib.flexible = {});
+			
+				if (metaEl) {
+					console.log('将根据已有的meta标签来设置缩放比例');
+					alert("有");
+					var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+					if (match) {
+						scale = parseFloat(match[1]);
+						dpr = parseInt(1 / scale);
+					}
+				} else if (flexibleEl) {
+					var content = flexibleEl.getAttribute('content');
+					if (content) {
+						var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+						var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+						if (initialDpr) {
+							dpr = parseFloat(initialDpr[1]);
+							scale = parseFloat((1 / dpr).toFixed(2));
+						}
+						if (maximumDpr) {
+							dpr = parseFloat(maximumDpr[1]);
+							scale = parseFloat((1 / dpr).toFixed(2));
+						}
+					}
+				}
+			
+			     
+				if (!dpr && !scale) {
+					var isAndroid = win.navigator.appVersion.match(/android/gi);
+					var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+					var devicePixelRatio = win.devicePixelRatio;//
+					if (isIPhone) {
+						// iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+						if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+							dpr = 3;
+						} else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+							dpr = 2;
+						} else {
+							dpr = 1;
+						}
+					} else {
+						// 其他设备下，仍旧使用1倍的方案
+						dpr = 1;
+					}
+					scale = 1 / dpr;
+				}
+				//动态设置viewport的scale
+				docEl.setAttribute('data-dpr', dpr);
+				if (!metaEl) {
+					metaEl = doc.createElement('meta');
+					metaEl.setAttribute('name', 'viewport');
+					metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+					if (docEl.firstElementChild) {
+						docEl.firstElementChild.appendChild(metaEl);
+					} else {
+						var wrap = doc.createElement('div');
+						wrap.appendChild(metaEl);
+						doc.write(wrap.innerHTML);
+					}
+				}
+				//flexible中定义<html>font-size
+				function refreshRem() {
+						//getBoundingClientRect().width相当于物理像素
+						var width = docEl.getBoundingClientRect().width;
+						// width / dpr > 540等于独立像素
+						if (width / dpr > 540) {
+							width = 540 * dpr;
+						}
+						var rem = width / 10;
+						docEl.style.fontSize = rem + 'px';
+						flexible.rem = win.rem = rem;
+					}
+					//第一种当窗口大小发生变化，也就是触发resize事件的时候；
+				win.addEventListener('resize', function() {
+					clearTimeout(tid);
+					tid = setTimeout(refreshRem, 300);
+				}, false);
+				win.addEventListener('pageshow', function(e) {
+					if (e.persisted) {
+						clearTimeout(tid);
+						tid = setTimeout(refreshRem, 300);
+					}
+				}, false);
+				if (doc.readyState === 'complete') {
+					doc.body.style.fontSize = 12 * dpr + 'px';
+				} else {
+					doc.addEventListener('DOMContentLoaded', function(e) {
+						doc.body.style.fontSize = 12 * dpr + 'px';
+					}, false);
+				}
+				refreshRem();
+				flexible.dpr = win.dpr = dpr;
+				flexible.refreshRem = refreshRem;
+				flexible.rem2px = function(d) {
+					var val = parseFloat(d) * this.rem;
+					if (typeof d === 'string' && d.match(/rem$/)) {
+						val += 'px';
+					}
+					return val;
+				}
+				flexible.px2rem = function(d) {
+					var val = parseFloat(d) / this.rem;
+					if (typeof d === 'string' && d.match(/px$/)) {
+						val += 'rem';
+					}
+					return val;
+				}
+			})(window, window['lib'] || (window['lib'] = {}));
+		</script>
+
+	</body>
+
+</html>
